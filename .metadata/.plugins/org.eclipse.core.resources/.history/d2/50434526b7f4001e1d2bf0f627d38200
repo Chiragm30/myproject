@@ -1,0 +1,39 @@
+package com.app.PrimeNumGeneratorServer.Entity;
+
+import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+
+public class PrimeNumResponse {
+
+	@Id
+	 @GeneratedValue(strategy = GenerationType.AUTO)
+	private int primeNumId=1;
+	
+	@ElementCollection
+	private List<Integer> primes;
+	private long elapsedTime;
+	
+	
+	@MapsId
+	@OneToOne(targetEntity =PrimeNum.class)
+    @JoinColumn(name="elapsedTime")
+    private PrimeNum primeNum;
+	
+}

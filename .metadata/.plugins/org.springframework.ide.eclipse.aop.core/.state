@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="JWTAuthentication"/>
+<aop-project name="microserviceminiproject-Adminserver"/>
+<aop-project name="My_Service-Registory"/>
+<aop-project name="jdbcAuthentication-security"/>
+<aop-project name="SpringSecurity"/>
+<aop-project name="Coding_task-2"/>
+<aop-project name="My_UserService1"/>
+<aop-project name="Udemy_ApiGateway"/>
+<aop-project name="mobile_app_ws"/>
+<aop-project name="Udemy_PhotoAppAccountManagementservice"/>
+<aop-project name="AegisTask"/>
+<aop-project name="My_AccountManagementservices"/>
+<aop-project name="Udemy_PhotoAppUserService"/>
+<aop-project name="microserviceRestAPI-feign-interelationservice"/>
+<aop-project name="My_ApiGateway"/>
+<aop-project name="microserviceRestAPI"/>
+<aop-project name="SpringBoot-OAuth2.0_App"/>
+<aop-project name="microserviceRestAPI-APIGateway"/>
+<aop-project name="Udemy_PhotoAppDiscoveryService"/>
+<aop-project name="microservice-restapi"/>
+<aop-project name="springbootrestapiLTTHomeLoanProject"/>
+<aop-project name="microserviceminiproject"/>
+</aop-reference-model>

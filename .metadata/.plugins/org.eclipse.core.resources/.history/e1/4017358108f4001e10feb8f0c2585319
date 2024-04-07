@@ -1,0 +1,5 @@
+package com.app.PrimeNumGeneratorServer.seviceI;
+
+public interface PrimeServiceI {
+
+}

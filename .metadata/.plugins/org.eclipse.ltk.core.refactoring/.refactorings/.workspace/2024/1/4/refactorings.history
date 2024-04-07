@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;Udemy_PhotoAppApi_ZuulApiGateway&apos;" deleteContents="true" description="Delete resource &apos;Udemy_PhotoAppApi_ZuulApiGateway&apos;" element1="/Udemy_PhotoAppApi_ZuulApiGateway" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1705853472585"/>
+</session>

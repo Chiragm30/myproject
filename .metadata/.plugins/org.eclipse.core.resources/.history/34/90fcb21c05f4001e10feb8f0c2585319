@@ -1,0 +1,5 @@
+package com.app.PrimeNumGeneratorServer.Controller;
+
+public class PrimeNum_Controller {
+
+}

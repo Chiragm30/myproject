@@ -1,0 +1,100 @@
+package com.app.PrimeNumGeneratorServer.PrimeservImpl;
+
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNumRequest;
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNumResponse;
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNum;
+import com.app.PrimeNumGeneratorServer.PrimeRepo.primeRepository;
+import com.app.PrimeNumGeneratorServer.seviceI.PrimeServiceI;
+
+@Service
+public class PservicesImpl implements PrimeServiceI
+{
+
+	@Autowired
+	private primeRepository prepo;
+	
+	@Override
+	public PrimeNum CalculatePrimeNumber(PrimeNumRequest prequest) 
+	{
+		int start =prequest.getStartRange();
+		int end=prequest.getEndRange();
+		
+		
+		long startTime = System.currentTimeMillis(); 
+		List<Integer> primeNumList=new ArrayList<>();
+		int count=0;
+		
+		for(int i=Math.max(start,2);i<=end;i++)
+	      {
+		    if(isPrime(i))
+		    {
+		    	primeNumList.add(i);
+		    	count++;
+		    }
+		  }
+		System.out.println("start time :-"+startTime);
+		
+		long endTime = System.currentTimeMillis();
+		
+		System.out.println("end time :-" +endTime);
+		long elapseTime = endTime - startTime;
+		
+		PrimeNum pnm=new PrimeNum();
+		pnm.setStartRange(start);
+		pnm.setEndRange(end);
+		pnm.setNumberOfPrime(count);
+		pnm.setElapsedTime(elapseTime);
+		pnm.setTimestamp(new Timestamp(System.currentTimeMillis()));
+		pnm.setPrimes(primeNumList);
+//		
+//		PrimeNumResponse prm=new PrimeNumResponse();
+//		prm.setPrimes(primeNumList);
+//		prm.setElapsedTime(elapseTime);
+
+		prepo.save(pnm);
+		
+		
+		return pnm;
+	}
+	private static boolean isPrime(int num) 
+    {
+	     if(num<=1)
+	      {
+		    return false;
+	      }
+	     else
+	      {
+		     for(int i=2;i<=Math.sqrt(num);i++)
+		       {
+			     if(num%i==0)
+			       {
+				     return false;
+			       }
+		       }
+	      }
+	   return true;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

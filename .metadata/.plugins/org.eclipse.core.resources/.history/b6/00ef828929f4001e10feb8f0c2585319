@@ -1,0 +1,16 @@
+package com.app.PrimeNumGeneratorServer.seviceI;
+
+import java.util.List;
+
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNumRequest;
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNumResponse;
+
+
+public interface PrimeServiceI {
+
+	public PrimeNumRequest postPrimeNumber(PrimeNumRequest prequest);
+
+	public List<PrimeNumResponse> getPrimeNum();
+
+	
+}

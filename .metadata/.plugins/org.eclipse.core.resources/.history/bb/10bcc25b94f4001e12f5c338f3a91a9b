@@ -1,0 +1,171 @@
+package com.app.PrimeNumGeneratorServer.PrimeservImpl;
+
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNumRequest;
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNumResponse;
+import com.app.PrimeNumGeneratorServer.Entity.primeNum;
+import com.app.PrimeNumGeneratorServer.PrimeRepo.primeRepository;
+import com.app.PrimeNumGeneratorServer.seviceI.PrimeServiceI;
+
+@Service
+public class PservicesImpl implements PrimeServiceI
+{
+
+	@Autowired
+	private primeRepository prepo;
+	
+	//we need to save this record  into database
+	
+//	@Override
+//	public PrimeNumResponse postPrimeNumber(PrimeNumRequest prequest)
+//	{
+//	  LocalDateTime startTime=LocalDateTime.now();
+//		primeNum pnm=new primeNum();
+//		pnm.setStartRange(prequest.getStartRange());
+//		pnm.setEndRange(prequest.getEndRange());;
+//		pnm.getId();
+//		
+//		prepo.save(pnm);
+//		
+//		System.out.println(getNumberOfPrime);
+//		
+//		
+//		
+//
+//		 
+//		PrimeNumResponse resp=new PrimeNumResponse();
+//		resp.setElapsedTime(elapsedTime);
+//	
+//		
+//		
+//	   return new PrimeNumResponse(primeNumList,elapsedTime);
+//	   
+//		
+//    }
+//	
+//	@Override
+//	public PrimeNumResponse getPrimeNum(long elapsedTime) 
+//	{
+//		PrimeNumResponse prm=new PrimeNumResponse();
+//		prm.setElapsedTime(elapsedTime);
+//		prm.setPrimes(primeNumList);
+//		return null;
+//	}
+//	
+//	PrimeNumRequest prequest=new PrimeNumRequest();
+//	
+//	int start =prequest.getStartRange();
+//	int end=prequest.getEndRange();
+//	List<Integer> primeNumList=generatePrimeNum(start,end);
+//	int count=0,
+//			getNumberOfPrime =+count;
+//			
+//				
+//			//write a code to generated prime number.
+//				private List<Integer> generatePrimeNum(int start, int end) 
+//				  {
+//					List<Integer> primeNumList=new ArrayList<>();
+//					for(int i=Math.max(start,2);i<=end;i++)
+//				      {
+//					    if(isPrime(i))
+//					    {
+//					    	primeNumList.add(i);
+//					    	count++;
+//					    }
+//					  }
+//					return primeNumList;
+//				  }
+//			   
+//	
+//}
+//	
+//	
+	
+	
+	
+	
+	
+//		primeNum pnum=primeNum.builder()
+//				  .startRange(startRange)
+//				  .endRange(endRange)
+//				  .timestamp(new Timestamp(System.currentTimeMillis()))
+//				  .numberOfPrime(numberOfPrime)
+//				  .elapsedTime(elapsedTime)
+//				  .build();
+		
+	
+//	
+	@Override
+	public primeNum CalculatePrimeNumber(PrimeNumRequest prequest) 
+	{
+		int start =prequest.getStartRange();
+		int end=prequest.getEndRange();
+		
+		
+		long startTime = System.currentTimeMillis(); 
+		List<Integer> primeNumList=new ArrayList<>();
+		int count=0;
+		
+		for(int i=Math.max(start,2);i<=end;i++)
+	      {
+		    if(isPrime(i))
+		    {
+		    	primeNumList.add(i);
+		    	count++;
+		    }
+		  }
+		long endTime = System.currentTimeMillis();
+		long elapseTime = endTime - startTime;
+		
+		primeNum pnm=new primeNum();
+		pnm.setStartRange(start);
+		pnm.setEndRange(end);
+		pnm.setNumberOfPrime(count);
+		pnm.setTimestamp(new Timestamp(System.currentTimeMillis()));
+		
+		
+		PrimeNumResponse 
+		prepo.save(pnm);
+		return pnm;
+	}
+	private static boolean isPrime(int num) 
+    {
+	     if(num<=1)
+	      {
+		    return false;
+	      }
+	     else
+	      {
+		     for(int i=2;i<=Math.sqrt(num);i++)
+		       {
+			     if(num%i==0)
+			       {
+				     return false;
+			       }
+		       }
+	      }
+	   return true;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+server: 
+  port: 8081
+spring: 
+  application:   
+    name: WELCOME-API
+  boot: 
+    admin:  
+      client: 
+        url: http://localhost:1111/
+       
+eureka: 
+  client: 
+   service-url: 
+     defaultZone: http://localhost:8761/eureka/ 
+
+#to enable all actuator endpoint to my application
+management: 
+  endpoint:  
+    web: 
+      exposure: 
+        include: '*'
+   

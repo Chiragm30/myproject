@@ -1,0 +1,119 @@
+package com.app.PrimeNumGeneratorServer.PrimeservImpl;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNumRequest;
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNumResponse;
+import com.app.PrimeNumGeneratorServer.Entity.PrimeNum;
+import com.app.PrimeNumGeneratorServer.PrimeRepo.primeRepository;
+import com.app.PrimeNumGeneratorServer.seviceI.PrimeServiceI;
+
+@Service
+public class PservicesImpl implements PrimeServiceI
+{
+
+	@Autowired
+	private primeRepository prepo;
+	
+	@Override
+	public PrimeNumResponse CalculatePrimeNumber(PrimeNumRequest pRequest) 
+	{
+		int start =pRequest.getFirstNumber();
+		int end=pRequest.getLastNumber();
+		
+		long startTime = System.currentTimeMillis(); 
+		List<Integer> primeNumList=new ArrayList<>();
+		int count=0;
+		
+		//Logic to calculate prime Number
+		for(int i=Math.max(start,2);i<=end;i++)
+	      {
+		    if(isPrime(i))
+		    {
+		    	primeNumList.add(i);
+		    	count++;
+		    }
+		  }
+	
+		
+		
+		//toCheck startTime print or not
+		System.out.println("start time :-"+startTime);
+		
+		long endTime = System.currentTimeMillis();
+		
+		//toCheckEndTime is print or not
+		System.out.println("end time :-" +endTime);
+		
+		//calculate elapsedTime
+		long elapseTime = endTime - startTime;
+		
+		System.out.println("elapseTime is :-" +elapseTime);
+		
+		//save data into Database for future Purpose
+		PrimeNum saveData=new PrimeNum();
+		saveData.setFirstNumber(start);
+		saveData.setLastNumber(end);
+		saveData.setPrimeCount(count);
+		saveData.setElapsedTime(elapseTime);
+		saveData.setTimeStamp(new Timestamp(System.currentTimeMillis()));
+		saveData.setPrimeNumber(primeNumList);
+    
+		 
+		//set and get data into response Entity
+		PrimeNumResponse prm=new PrimeNumResponse();
+		prm.setPrimeNumber(saveData.getPrimeNumber());;
+		prm.setElapsedTime(saveData.getElapsedTime());
+		
+		prepo.save(saveData);
+		
+		
+	  return prm;
+  }
+	
+	
+	private static boolean isPrime(int num) 
+    {
+//	     if(num<=1)
+//	      {
+//		    return false;
+//	      }
+//	     else
+//	      {
+//		     for(int i=2;i<=Math.sqrt(num);i++)
+//		       {
+//			     if(num%i==0)
+//			       {
+//				     return false;
+//			       }
+//		       }
+//	      }
+//	   return true;
+//    }
+	
+	//used ternary oprator to reduce time complexity
+	 return num > 1 && IntStream.rangeClosed(2, (int) Math.sqrt(num))
+			 .noneMatch(i -> num % i == 0);
+	
+	
+    }
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
